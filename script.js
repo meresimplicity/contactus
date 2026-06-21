@@ -9,15 +9,12 @@ const stepLabel = document.getElementById("stepLabel");
 const progressLabel = document.getElementById("progressLabel");
 const progressFill = document.getElementById("progressFill");
 
-const resultCard = document.getElementById("resultCard");
-const resultTitle = document.getElementById("resultTitle");
-const resultText = document.getElementById("resultText");
-const scoreText = document.getElementById("scoreText");
-const scoreFill = document.getElementById("scoreFill");
-const restartBtn = document.getElementById("restartBtn");
-
 const conditionalPanels = document.querySelectorAll(".conditional-panel");
 const conditionalEmpty = document.getElementById("conditionalEmpty");
+
+const recommendedServiceField = document.getElementById("recommendedService");
+const businessScoreField = document.getElementById("businessScore");
+const fullSummaryField = document.getElementById("fullSummary");
 
 let currentStep = 0;
 
@@ -110,7 +107,7 @@ backBtn.addEventListener("click", () => {
 });
 
 function updateConditionalPanels() {
-  const selectedPanels = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+  const selectedPanels = Array.from(document.querySelectorAll('input[name="services_needed"]:checked'))
     .map(input => input.dataset.panel);
 
   let visibleCount = 0;
@@ -125,56 +122,69 @@ function updateConditionalPanels() {
   conditionalEmpty.classList.toggle("hidden", visibleCount > 0);
 }
 
-document.querySelectorAll('input[name="services"]').forEach(input => {
+document.querySelectorAll('input[name="services_needed"]').forEach(input => {
   input.addEventListener("change", updateConditionalPanels);
 });
 
-function getFormValues() {
-  const data = new FormData(form);
+function getCheckedValues(name) {
+  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+    .map(input => input.value);
+}
 
+function getValue(name) {
+  const field = document.querySelector(`[name="${name}"]`);
+  return field ? field.value.trim() : "";
+}
+
+function getRadioValue(name) {
+  const selected = document.querySelector(`input[name="${name}"]:checked`);
+  return selected ? selected.value : "";
+}
+
+function collectFormData() {
   return {
-    fullName: data.get("fullName") || "",
-    businessName: data.get("businessName") || "",
-    phone: data.get("phone") || "",
-    email: data.get("email") || "",
-    location: data.get("location") || "",
-    industry: data.get("industry") || "",
-    stage: data.get("stage") || "",
-    services: data.getAll("services"),
-    assets: data.getAll("assets"),
-    currentLink: data.get("currentLink") || "",
+    fullName: getValue("full_name"),
+    businessName: getValue("business_name"),
+    whatsapp: getValue("whatsapp_number"),
+    email: getValue("email"),
+    location: getValue("location"),
+    industry: getValue("industry"),
+    stage: getRadioValue("business_stage"),
+    services: getCheckedValues("services_needed"),
+    assets: getCheckedValues("current_assets"),
+    currentLink: getValue("current_website_or_social_link"),
 
-    companyRegistered: data.get("companyRegistered") || "",
-    registrationDocuments: data.get("registrationDocuments") || "",
+    companyStatus: getValue("company_registered_status"),
+    registrationDocs: getValue("registration_documents_needed"),
 
-    websiteType: data.get("websiteType") || "",
-    hostingStatus: data.get("hostingStatus") || "",
+    websiteType: getValue("website_type_needed"),
+    hostingStatus: getValue("hosting_domain_status"),
 
-    marketingPlatforms: data.get("marketingPlatforms") || "",
-    marketingProblem: data.get("marketingProblem") || "",
+    marketingPlatforms: getValue("marketing_platforms"),
+    marketingProblem: getValue("marketing_problem"),
 
-    customerContactMethod: data.get("customerContactMethod") || "",
-    salesFollowUp: data.get("salesFollowUp") || "",
+    customerContact: getValue("customer_contact_method"),
+    salesFollowUp: getValue("sales_follow_up_process"),
 
-    manualTasks: data.get("manualTasks") || "",
-    currentTools: data.get("currentTools") || "",
+    manualTasks: getValue("manual_tasks"),
+    currentTools: getValue("current_tools"),
 
-    operationsProblem: data.get("operationsProblem") || "",
-    processDocumentation: data.get("processDocumentation") || "",
+    operationsProblem: getValue("operations_problem"),
+    processDocumentation: getValue("process_documentation_status"),
 
-    timeline: data.get("timeline") || "",
-    budget: data.get("budget") || "",
-    urgency: data.get("urgency") || "",
-    decisionMaker: data.get("decisionMaker") || "",
+    timeline: getValue("timeline"),
+    budget: getValue("budget_range"),
+    urgency: getValue("urgency"),
+    decisionMaker: getValue("decision_maker"),
 
-    goal: data.get("goal") || "",
-    extraNotes: data.get("extraNotes") || ""
+    message: getValue("message"),
+    extraNotes: getValue("extra_notes")
   };
 }
 
-function createRecommendation(values) {
-  const services = values.services;
-  const stage = values.stage;
+function createRecommendation(data) {
+  const services = data.services;
+  const stage = data.stage;
 
   if (
     services.length >= 4 ||
@@ -184,10 +194,7 @@ function createRecommendation(values) {
       services.includes("Marketing")
     )
   ) {
-    return {
-      title: "Full Business Growth System",
-      text: "Your form has been submitted. Based on your answers, your business needs a connected growth system covering visibility, sales, automation, and operational structure."
-    };
+    return "Full Business Growth System";
   }
 
   if (
@@ -195,258 +202,150 @@ function createRecommendation(values) {
     stage === "Started but not registered" ||
     services.includes("Business Registration")
   ) {
-    return {
-      title: "Business Foundation Setup",
-      text: "Your form has been submitted. Based on your answers, your first priority is business structure, registration support, documentation, and a professional digital presence."
-    };
+    return "Business Foundation Setup";
   }
 
   if (
     services.includes("Website Services") ||
     stage === "Registered but weak online presence"
   ) {
-    return {
-      title: "Website & Visibility System",
-      text: "Your form has been submitted. Based on your answers, your business needs a stronger online presence, a clean website, SEO setup, and better customer visibility."
-    };
+    return "Website & Visibility System";
   }
 
   if (
     services.includes("Sales Systems") ||
     services.includes("Marketing")
   ) {
-    return {
-      title: "Sales & Marketing Growth System",
-      text: "Your form has been submitted. Based on your answers, your business needs better marketing, lead generation, customer follow-up, and a stronger sales system."
-    };
+    return "Sales & Marketing Growth System";
   }
 
   if (
     services.includes("Automation and Support") ||
     services.includes("Industrial Engineering")
   ) {
-    return {
-      title: "Operations & Automation System",
-      text: "Your form has been submitted. Based on your answers, your business needs better workflow, automation, process improvement, and reduced manual work."
-    };
+    return "Operations & Automation System";
   }
 
-  return {
-    title: "Business Growth Consultation",
-    text: "Your form has been submitted. Based on your answers, your business needs a custom review so we can recommend the best starting point."
-  };
+  return "Business Growth Consultation";
 }
 
-function calculateScore(values) {
+function calculateScore(data) {
   let score = 20;
 
-  score += values.assets.length * 5;
-  score += values.services.length * 4;
+  score += data.assets.length * 5;
+  score += data.services.length * 4;
 
-  if (values.stage === "Registered but weak online presence") score += 12;
-  if (values.stage === "Operating but need better systems") score += 18;
-  if (values.email) score += 5;
-  if (values.currentLink) score += 5;
-  if (values.timeline === "Immediately") score += 8;
-  if (values.urgency === "Very urgent") score += 8;
+  if (data.stage === "Registered but weak online presence") score += 12;
+  if (data.stage === "Operating but need better systems") score += 18;
+  if (data.email) score += 5;
+  if (data.currentLink) score += 5;
+  if (data.timeline === "Immediately") score += 8;
+  if (data.urgency === "Very urgent") score += 8;
 
   return Math.min(score, 96);
 }
 
-function buildSummary(values, recommendation, score) {
+function buildSummary(data, recommendation, score) {
   return `
 New Mere Simplicity Business Checkup
 
 Full Name:
-${values.fullName}
+${data.fullName}
 
 Business Name:
-${values.businessName || "Not provided"}
+${data.businessName || "Not provided"}
 
 WhatsApp:
-${values.phone}
+${data.whatsapp}
 
 Email:
-${values.email || "Not provided"}
+${data.email || "Not provided"}
 
 Location:
-${values.location || "Not provided"}
+${data.location || "Not provided"}
 
 Industry:
-${values.industry || "Not provided"}
+${data.industry || "Not provided"}
 
 Business Stage:
-${values.stage}
+${data.stage}
 
 Services Needed:
-${values.services.length ? values.services.join(", ") : "Not selected"}
+${data.services.length ? data.services.join(", ") : "Not selected"}
 
 Current Business Assets:
-${values.assets.length ? values.assets.join(", ") : "None selected"}
+${data.assets.length ? data.assets.join(", ") : "None selected"}
 
 Current Website / Social Link:
-${values.currentLink || "Not provided"}
+${data.currentLink || "Not provided"}
 
 Registration Details:
-Company Status: ${values.companyRegistered || "Not provided"}
-Documents Needed: ${values.registrationDocuments || "Not provided"}
+Company Status: ${data.companyStatus || "Not provided"}
+Documents Needed: ${data.registrationDocs || "Not provided"}
 
 Website Details:
-Website Type: ${values.websiteType || "Not provided"}
-Hosting / Domain: ${values.hostingStatus || "Not provided"}
+Website Type: ${data.websiteType || "Not provided"}
+Hosting / Domain: ${data.hostingStatus || "Not provided"}
 
 Marketing Details:
-Platforms: ${values.marketingPlatforms || "Not provided"}
-Marketing Problem: ${values.marketingProblem || "Not provided"}
+Platforms: ${data.marketingPlatforms || "Not provided"}
+Marketing Problem: ${data.marketingProblem || "Not provided"}
 
 Sales Details:
-Customer Contact Method: ${values.customerContactMethod || "Not provided"}
-Sales Follow-Up: ${values.salesFollowUp || "Not provided"}
+Customer Contact Method: ${data.customerContact || "Not provided"}
+Sales Follow-Up: ${data.salesFollowUp || "Not provided"}
 
 Automation Details:
-Manual Tasks: ${values.manualTasks || "Not provided"}
-Current Tools: ${values.currentTools || "Not provided"}
+Manual Tasks: ${data.manualTasks || "Not provided"}
+Current Tools: ${data.currentTools || "Not provided"}
 
 Operations Details:
-Operations Problem: ${values.operationsProblem || "Not provided"}
-Process Documentation: ${values.processDocumentation || "Not provided"}
+Operations Problem: ${data.operationsProblem || "Not provided"}
+Process Documentation: ${data.processDocumentation || "Not provided"}
 
 Timeline:
-${values.timeline}
+${data.timeline}
 
 Budget:
-${values.budget}
+${data.budget}
 
 Urgency:
-${values.urgency}
+${data.urgency}
 
 Decision Maker:
-${values.decisionMaker || "Not provided"}
+${data.decisionMaker || "Not provided"}
 
-Goal:
-${values.goal}
+Main Goal:
+${data.message}
 
 Extra Notes:
-${values.extraNotes || "None"}
+${data.extraNotes || "None"}
 
-Recommended Service Path:
-${recommendation.title}
-
-Recommendation:
-${recommendation.text}
+Recommended Service:
+${recommendation}
 
 Business Readiness Score:
 ${score}%
 `;
 }
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
+form.addEventListener("submit", (event) => {
+  if (!validateCurrentStep()) {
+    event.preventDefault();
+    return;
+  }
 
-  if (!validateCurrentStep()) return;
+  const data = collectFormData();
+  const recommendation = createRecommendation(data);
+  const score = calculateScore(data);
+  const summary = buildSummary(data, recommendation, score);
+
+  recommendedServiceField.value = recommendation;
+  businessScoreField.value = `${score}%`;
+  fullSummaryField.value = summary;
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "Sending...";
-
-  const values = getFormValues();
-  const recommendation = createRecommendation(values);
-  const score = calculateScore(values);
-  const summary = buildSummary(values, recommendation, score);
-
-  const formspreeData = new FormData();
-
-  formspreeData.append("_subject", "New Mere Simplicity Business Checkup");
-  formspreeData.append("Full Name", values.fullName);
-  formspreeData.append("Business Name", values.businessName || "Not provided");
-  formspreeData.append("WhatsApp", values.phone);
-  formspreeData.append("Email", values.email || "Not provided");
-  formspreeData.append("Location", values.location || "Not provided");
-  formspreeData.append("Industry", values.industry || "Not provided");
-  formspreeData.append("Business Stage", values.stage);
-  formspreeData.append("Services Needed", values.services.join(", "));
-  formspreeData.append("Current Assets", values.assets.join(", ") || "None selected");
-  formspreeData.append("Current Website / Social Link", values.currentLink || "Not provided");
-
-  formspreeData.append("Company Status", values.companyRegistered || "Not provided");
-  formspreeData.append("Documents Needed", values.registrationDocuments || "Not provided");
-
-  formspreeData.append("Website Type", values.websiteType || "Not provided");
-  formspreeData.append("Hosting / Domain", values.hostingStatus || "Not provided");
-
-  formspreeData.append("Marketing Platforms", values.marketingPlatforms || "Not provided");
-  formspreeData.append("Marketing Problem", values.marketingProblem || "Not provided");
-
-  formspreeData.append("Customer Contact Method", values.customerContactMethod || "Not provided");
-  formspreeData.append("Sales Follow-Up", values.salesFollowUp || "Not provided");
-
-  formspreeData.append("Manual Tasks", values.manualTasks || "Not provided");
-  formspreeData.append("Current Tools", values.currentTools || "Not provided");
-
-  formspreeData.append("Operations Problem", values.operationsProblem || "Not provided");
-  formspreeData.append("Process Documentation", values.processDocumentation || "Not provided");
-
-  formspreeData.append("Timeline", values.timeline);
-  formspreeData.append("Budget", values.budget);
-  formspreeData.append("Urgency", values.urgency);
-  formspreeData.append("Decision Maker", values.decisionMaker || "Not provided");
-
-  formspreeData.append("Goal", values.goal);
-  formspreeData.append("Extra Notes", values.extraNotes || "None");
-
-  formspreeData.append("Recommended Service Path", recommendation.title);
-  formspreeData.append("Recommendation", recommendation.text);
-  formspreeData.append("Business Readiness Score", `${score}%`);
-  formspreeData.append("Full Summary", summary);
-
-  try {
-    const response = await fetch("https://formspree.io/f/xvznjlqk", {
-      method: "POST",
-      body: formspreeData,
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error("Form submission failed");
-    }
-
-    resultTitle.textContent = recommendation.title;
-    resultText.textContent = recommendation.text;
-    scoreText.textContent = `${score}%`;
-
-    setTimeout(() => {
-      scoreFill.style.width = `${score}%`;
-    }, 150);
-
-    form.classList.add("hidden");
-    resultCard.classList.remove("hidden");
-
-    resultCard.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  } catch (error) {
-    showAlert("Something went wrong. Please try again.");
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Submit Business Checkup";
-  }
-});
-
-restartBtn.addEventListener("click", () => {
-  form.reset();
-  currentStep = 0;
-
-  form.classList.remove("hidden");
-  resultCard.classList.add("hidden");
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = "Submit Business Checkup";
-  scoreFill.style.width = "0";
-
-  updateStep();
+  submitBtn.textContent = "Submitting...";
 });
 
 updateStep();
