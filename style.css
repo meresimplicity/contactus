@@ -22,6 +22,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 110px;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background: var(--bg);
@@ -53,6 +57,8 @@ textarea {
   pointer-events: none;
 }
 
+/* HEADER */
+
 .header {
   width: calc(100% - 32px);
   max-width: 1320px;
@@ -62,6 +68,7 @@ textarea {
   border-radius: 999px;
   background: rgba(247, 244, 239, 0.82);
   backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,6 +132,8 @@ textarea {
   cursor: pointer;
 }
 
+/* FLOATING FORM BUTTON */
+
 .floating-checkup-btn {
   position: fixed;
   right: 24px;
@@ -149,7 +158,7 @@ textarea {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--cream);
+  background: #efe4d6;
   color: #111;
   display: grid;
   place-items: center;
@@ -169,6 +178,8 @@ textarea {
     transform: translateY(-8px);
   }
 }
+
+/* HERO */
 
 .hero {
   max-width: 1320px;
@@ -194,11 +205,11 @@ textarea {
   font-size: clamp(44px, 7vw, 96px);
   line-height: 0.92;
   letter-spacing: -5px;
-  max-width: 890px;
+  max-width: 870px;
 }
 
 .hero-text {
-  max-width: 720px;
+  max-width: 700px;
   margin-top: 28px;
   font-size: 19px;
   color: var(--muted);
@@ -247,11 +258,6 @@ textarea {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
-.full-btn {
-  width: 100%;
-  margin-top: 26px;
-}
-
 .trust-row {
   margin-top: 36px;
   display: flex;
@@ -269,80 +275,22 @@ textarea {
   color: var(--muted);
 }
 
+/* HERO VISUAL */
+
 .hero-visual {
   display: flex;
   justify-content: center;
 }
 
-.intake-preview {
-  width: min(100%, 460px);
-  padding: 34px;
-  border-radius: 38px;
+.dashboard-card {
+  width: min(100%, 440px);
+  padding: 30px;
+  border-radius: 36px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.82)),
-    radial-gradient(circle at top right, rgba(201, 173, 139, 0.38), transparent 44%);
-  border: 1px solid rgba(255,255,255,0.9);
+    linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.82)),
+    radial-gradient(circle at top right, rgba(201, 173, 139, 0.4), transparent 40%);
+  border: 1px solid rgba(255,255,255,0.8);
   box-shadow: var(--shadow);
-}
-
-.preview-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: white;
-  display: grid;
-  place-items: center;
-  margin-bottom: 24px;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-}
-
-.preview-logo img {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-}
-
-.intake-preview h3 {
-  font-size: 42px;
-  line-height: 0.95;
-  letter-spacing: -2px;
-  margin-bottom: 14px;
-}
-
-.intake-preview p {
-  color: var(--muted);
-}
-
-.preview-steps {
-  margin-top: 26px;
-  display: grid;
-  gap: 12px;
-}
-
-.preview-steps div {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.preview-steps span {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--dark);
-  color: white;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.preview-steps strong {
-  font-size: 14px;
 }
 
 .floating {
@@ -358,6 +306,107 @@ textarea {
     transform: translateY(-14px);
   }
 }
+
+.dashboard-top {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.dashboard-top span {
+  width: 12px;
+  height: 12px;
+  background: var(--soft);
+  border-radius: 50%;
+}
+
+.dashboard-title h3 {
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.dashboard-title p {
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.growth-ring {
+  width: 210px;
+  height: 210px;
+  margin: 34px auto;
+  border-radius: 50%;
+  background:
+    conic-gradient(var(--dark) 0deg 245deg, var(--soft) 245deg 360deg);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.growth-ring::after {
+  content: "";
+  width: 158px;
+  height: 158px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.growth-ring div {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.growth-ring strong {
+  display: block;
+  font-size: 36px;
+  letter-spacing: -2px;
+}
+
+.growth-ring span {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.mini-bars {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  height: 90px;
+  margin-top: 10px;
+}
+
+.mini-bars span {
+  flex: 1;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(to top, var(--dark), var(--gold));
+}
+
+.mini-bars span:nth-child(1) { height: 32%; }
+.mini-bars span:nth-child(2) { height: 52%; }
+.mini-bars span:nth-child(3) { height: 42%; }
+.mini-bars span:nth-child(4) { height: 72%; }
+.mini-bars span:nth-child(5) { height: 88%; }
+
+.dashboard-note {
+  margin-top: 28px;
+  background: #f8f4ef;
+  padding: 16px;
+  border-radius: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--muted);
+}
+
+.dashboard-note i {
+  color: var(--dark);
+  margin-top: 4px;
+}
+
+/* CHECKUP FORM SECTION */
 
 .checkup {
   background: var(--dark);
@@ -415,6 +464,8 @@ textarea {
   transition: 0.35s ease;
 }
 
+/* FORM SHELL */
+
 .form-shell {
   background: var(--bg);
   color: var(--text);
@@ -471,6 +522,8 @@ textarea {
   color: var(--muted);
 }
 
+/* INPUTS */
+
 .input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -515,6 +568,8 @@ textarea:focus {
   box-shadow: 0 0 0 4px rgba(0,0,0,0.06);
 }
 
+/* CHOICE CARDS */
+
 .choice-grid {
   display: grid;
   gap: 13px;
@@ -558,6 +613,8 @@ textarea:focus {
   background: #f0e7dc;
 }
 
+/* CHECKBOX GRID */
+
 .mini-checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -578,6 +635,8 @@ textarea:focus {
   width: auto;
   margin: 0;
 }
+
+/* CONDITIONAL QUESTIONS */
 
 .conditional-empty {
   border: 1px dashed rgba(0,0,0,0.2);
@@ -616,6 +675,8 @@ textarea:focus {
   gap: 10px;
 }
 
+/* BUTTONS */
+
 .form-buttons {
   margin-top: 28px;
   display: flex;
@@ -626,6 +687,8 @@ textarea:focus {
 .hidden {
   display: none !important;
 }
+
+/* RESULT CARD */
 
 .result-card {
   animation: stepIn 0.35s ease;
@@ -695,10 +758,12 @@ textarea:focus {
   color: var(--muted);
 }
 
+/* VALUE STRIP */
+
 .value-strip {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 80px 16px 20px;
+  padding: 90px 16px 80px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
@@ -727,6 +792,8 @@ textarea:focus {
   font-size: 14px;
 }
 
+/* SERVICES */
+
 .services,
 .contact {
   max-width: 1320px;
@@ -735,7 +802,7 @@ textarea:focus {
 }
 
 .section-heading {
-  max-width: 820px;
+  max-width: 800px;
   margin-bottom: 44px;
 }
 
@@ -812,6 +879,8 @@ textarea:focus {
   margin-bottom: 8px;
 }
 
+/* CONTACT */
+
 .social-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -854,6 +923,8 @@ textarea:focus {
   font-size: 13px;
 }
 
+/* FOOTER */
+
 .footer {
   background: var(--dark);
   color: white;
@@ -876,6 +947,8 @@ textarea:focus {
   font-size: 14px;
 }
 
+/* SCROLL REVEAL */
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -887,15 +960,7 @@ textarea:focus {
   transform: translateY(0);
 }
 
-.form-alert {
-  background: #fff3f3;
-  color: #8a1f1f;
-  border: 1px solid rgba(138,31,31,0.15);
-  padding: 14px 16px;
-  border-radius: 16px;
-  font-weight: 800;
-  margin-bottom: 18px;
-}
+/* RESPONSIVE */
 
 @media (max-width: 1000px) {
   .hero,
@@ -918,9 +983,22 @@ textarea:focus {
 }
 
 @media (max-width: 760px) {
+  body {
+    padding-bottom: 78px;
+  }
+
   .header {
     border-radius: 24px;
     align-items: flex-start;
+  }
+
+  .brand strong {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .brand span {
+    font-size: 11px;
   }
 
   .menu-btn {
@@ -946,6 +1024,14 @@ textarea:focus {
 
   .nav.open {
     display: flex;
+  }
+
+  .floating-checkup-btn {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    justify-content: center;
+    padding: 14px 18px;
   }
 
   .hero {
@@ -977,17 +1063,8 @@ textarea:focus {
     width: 100%;
   }
 
-  .floating-checkup-btn {
-    right: 16px;
-    left: 16px;
-    bottom: 16px;
-    justify-content: center;
-    padding: 14px 18px;
-  }
-
   .footer {
     text-align: center;
     justify-content: center;
-    padding-bottom: 90px;
   }
 }
