@@ -53,6 +53,8 @@ textarea {
   pointer-events: none;
 }
 
+/* HEADER */
+
 .header {
   width: calc(100% - 32px);
   max-width: 1320px;
@@ -124,6 +126,8 @@ textarea {
   border-radius: 50%;
   cursor: pointer;
 }
+
+/* HERO */
 
 .hero {
   max-width: 1320px;
@@ -218,6 +222,8 @@ textarea {
   background: rgba(255, 255, 255, 0.5);
   color: var(--muted);
 }
+
+/* HERO VISUAL */
 
 .hero-visual {
   display: flex;
@@ -326,11 +332,25 @@ textarea {
   background: linear-gradient(to top, var(--dark), var(--gold));
 }
 
-.mini-bars span:nth-child(1) { height: 32%; }
-.mini-bars span:nth-child(2) { height: 52%; }
-.mini-bars span:nth-child(3) { height: 42%; }
-.mini-bars span:nth-child(4) { height: 72%; }
-.mini-bars span:nth-child(5) { height: 88%; }
+.mini-bars span:nth-child(1) {
+  height: 32%;
+}
+
+.mini-bars span:nth-child(2) {
+  height: 52%;
+}
+
+.mini-bars span:nth-child(3) {
+  height: 42%;
+}
+
+.mini-bars span:nth-child(4) {
+  height: 72%;
+}
+
+.mini-bars span:nth-child(5) {
+  height: 88%;
+}
 
 .dashboard-note {
   margin-top: 28px;
@@ -347,6 +367,8 @@ textarea {
   color: var(--dark);
   margin-top: 4px;
 }
+
+/* VALUE STRIP */
 
 .value-strip {
   max-width: 1320px;
@@ -379,6 +401,8 @@ textarea {
   color: rgba(255,255,255,0.65);
   font-size: 14px;
 }
+
+/* SERVICES */
 
 .services,
 .contact {
@@ -465,13 +489,12 @@ textarea {
   margin-bottom: 8px;
 }
 
+/* CHECKUP FORM SECTION */
+
 .checkup {
   background: var(--dark);
   color: white;
   padding: 100px 16px;
-}
-
-.checkup {
   display: grid;
   grid-template-columns: minmax(0, 500px) minmax(0, 760px);
   justify-content: center;
@@ -523,6 +546,8 @@ textarea {
   border-radius: 999px;
   transition: 0.35s ease;
 }
+
+/* FORM SHELL */
 
 .form-shell {
   background: var(--bg);
@@ -580,6 +605,8 @@ textarea {
   color: var(--muted);
 }
 
+/* INPUTS */
+
 .input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -624,6 +651,8 @@ textarea:focus {
   box-shadow: 0 0 0 4px rgba(0,0,0,0.06);
 }
 
+/* CHOICE CARDS */
+
 .choice-grid {
   display: grid;
   gap: 13px;
@@ -667,6 +696,8 @@ textarea:focus {
   background: #f0e7dc;
 }
 
+/* CHECKBOX GRID */
+
 .mini-checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -687,6 +718,8 @@ textarea:focus {
   width: auto;
   margin: 0;
 }
+
+/* CONDITIONAL QUESTIONS */
 
 .conditional-empty {
   border: 1px dashed rgba(0,0,0,0.2);
@@ -725,6 +758,8 @@ textarea:focus {
   gap: 10px;
 }
 
+/* BUTTONS */
+
 .form-buttons {
   margin-top: 28px;
   display: flex;
@@ -735,6 +770,8 @@ textarea:focus {
 .hidden {
   display: none !important;
 }
+
+/* RESULT CARD */
 
 .result-card {
   animation: stepIn 0.35s ease;
@@ -804,6 +841,8 @@ textarea:focus {
   color: var(--muted);
 }
 
+/* CONTACT */
+
 .social-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -846,6 +885,8 @@ textarea:focus {
   font-size: 13px;
 }
 
+/* FOOTER */
+
 .footer {
   background: var(--dark);
   color: white;
@@ -868,6 +909,8 @@ textarea:focus {
   font-size: 14px;
 }
 
+/* SCROLL REVEAL */
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -878,6 +921,8 @@ textarea:focus {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 1000px) {
   .hero,
