@@ -14,46 +14,12 @@ const resultTitle = document.getElementById("resultTitle");
 const resultText = document.getElementById("resultText");
 const scoreText = document.getElementById("scoreText");
 const scoreFill = document.getElementById("scoreFill");
-
-const whatsappLink = document.getElementById("whatsappLink");
-const emailLink = document.getElementById("emailLink");
-const copyBtn = document.getElementById("copyBtn");
 const restartBtn = document.getElementById("restartBtn");
-
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("nav");
 
 const conditionalPanels = document.querySelectorAll(".conditional-panel");
 const conditionalEmpty = document.getElementById("conditionalEmpty");
 
 let currentStep = 0;
-let finalSummary = "";
-
-document.getElementById("year").textContent = `© ${new Date().getFullYear()} Mere Simplicity`;
-
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
-
-document.querySelectorAll(".nav a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-  });
-});
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, {
-  threshold: 0.14
-});
-
-document.querySelectorAll(".reveal").forEach(element => {
-  observer.observe(element);
-});
 
 function updateStep() {
   steps.forEach((step, index) => {
@@ -72,10 +38,8 @@ function updateStep() {
 
   updateConditionalPanels();
 
-  const checkupSection = document.getElementById("checkup");
-
-  if (checkupSection && currentStep > 0) {
-    checkupSection.scrollIntoView({
+  if (currentStep > 0) {
+    document.querySelector(".form-section").scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
@@ -120,14 +84,6 @@ function showAlert(message) {
   const alert = document.createElement("div");
   alert.className = "form-alert";
   alert.textContent = message;
-
-  alert.style.background = "#fff3f3";
-  alert.style.color = "#8a1f1f";
-  alert.style.border = "1px solid rgba(138,31,31,0.15)";
-  alert.style.padding = "14px 16px";
-  alert.style.borderRadius = "16px";
-  alert.style.fontWeight = "800";
-  alert.style.marginBottom = "18px";
 
   const activeStep = steps[currentStep];
   activeStep.prepend(alert);
@@ -230,7 +186,7 @@ function createRecommendation(values) {
   ) {
     return {
       title: "Full Business Growth System",
-      text: "Your business needs a connected growth system. The best path is to combine online presence, marketing, sales flow, automation, and operational structure so everything works together instead of separately."
+      text: "Your form has been submitted. Based on your answers, your business needs a connected growth system covering visibility, sales, automation, and operational structure."
     };
   }
 
@@ -241,7 +197,7 @@ function createRecommendation(values) {
   ) {
     return {
       title: "Business Foundation Setup",
-      text: "Your first priority is structure. You need registration support, proper business documentation, compliance guidance, and a professional digital presence that makes your business look serious."
+      text: "Your form has been submitted. Based on your answers, your first priority is business structure, registration support, documentation, and a professional digital presence."
     };
   }
 
@@ -251,7 +207,7 @@ function createRecommendation(values) {
   ) {
     return {
       title: "Website & Visibility System",
-      text: "Your business needs a stronger online presence. The best path is a clean website, mobile-first design, SEO setup, business contact structure, and better visibility for customers searching online."
+      text: "Your form has been submitted. Based on your answers, your business needs a stronger online presence, a clean website, SEO setup, and better customer visibility."
     };
   }
 
@@ -261,7 +217,7 @@ function createRecommendation(values) {
   ) {
     return {
       title: "Sales & Marketing Growth System",
-      text: "Your business needs a clear way to attract attention, capture leads, follow up, and convert people into paying customers. The best path is strategy, content, lead generation, and a simple sales system."
+      text: "Your form has been submitted. Based on your answers, your business needs better marketing, lead generation, customer follow-up, and a stronger sales system."
     };
   }
 
@@ -271,13 +227,13 @@ function createRecommendation(values) {
   ) {
     return {
       title: "Operations & Automation System",
-      text: "Your business needs better flow. The best path is to reduce manual work, standardize processes, improve workflow, and create systems that make daily operations smoother."
+      text: "Your form has been submitted. Based on your answers, your business needs better workflow, automation, process improvement, and reduced manual work."
     };
   }
 
   return {
     title: "Business Growth Consultation",
-    text: "Your business needs a custom review. The best path is to first understand your current position, then build the right setup around your goals, budget, and urgency."
+    text: "Your form has been submitted. Based on your answers, your business needs a custom review so we can recommend the best starting point."
   };
 }
 
@@ -299,18 +255,25 @@ function calculateScore(values) {
 
 function buildSummary(values, recommendation, score) {
   return `
-Hello Mere Simplicity.
+New Mere Simplicity Business Checkup
 
-My name is ${values.fullName}.
+Full Name:
+${values.fullName}
 
 Business Name:
 ${values.businessName || "Not provided"}
 
-Contact:
-WhatsApp: ${values.phone}
-Email: ${values.email || "Not provided"}
-Location: ${values.location || "Not provided"}
-Industry: ${values.industry || "Not provided"}
+WhatsApp:
+${values.phone}
+
+Email:
+${values.email || "Not provided"}
+
+Location:
+${values.location || "Not provided"}
+
+Industry:
+${values.industry || "Not provided"}
 
 Business Stage:
 ${values.stage}
@@ -377,65 +340,113 @@ ${score}%
 `;
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (!validateCurrentStep()) return;
 
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
+
   const values = getFormValues();
   const recommendation = createRecommendation(values);
   const score = calculateScore(values);
+  const summary = buildSummary(values, recommendation, score);
 
-  finalSummary = buildSummary(values, recommendation, score);
+  const formspreeData = new FormData();
 
-  resultTitle.textContent = recommendation.title;
-  resultText.textContent = recommendation.text;
+  formspreeData.append("_subject", "New Mere Simplicity Business Checkup");
+  formspreeData.append("Full Name", values.fullName);
+  formspreeData.append("Business Name", values.businessName || "Not provided");
+  formspreeData.append("WhatsApp", values.phone);
+  formspreeData.append("Email", values.email || "Not provided");
+  formspreeData.append("Location", values.location || "Not provided");
+  formspreeData.append("Industry", values.industry || "Not provided");
+  formspreeData.append("Business Stage", values.stage);
+  formspreeData.append("Services Needed", values.services.join(", "));
+  formspreeData.append("Current Assets", values.assets.join(", ") || "None selected");
+  formspreeData.append("Current Website / Social Link", values.currentLink || "Not provided");
 
-  scoreText.textContent = `${score}%`;
+  formspreeData.append("Company Status", values.companyRegistered || "Not provided");
+  formspreeData.append("Documents Needed", values.registrationDocuments || "Not provided");
 
-  setTimeout(() => {
-    scoreFill.style.width = `${score}%`;
-  }, 150);
+  formspreeData.append("Website Type", values.websiteType || "Not provided");
+  formspreeData.append("Hosting / Domain", values.hostingStatus || "Not provided");
 
-  const encodedSummary = encodeURIComponent(finalSummary);
+  formspreeData.append("Marketing Platforms", values.marketingPlatforms || "Not provided");
+  formspreeData.append("Marketing Problem", values.marketingProblem || "Not provided");
 
-  whatsappLink.href = `https://wa.me/27679937070?text=${encodedSummary}`;
-  emailLink.href = `mailto:vision.teamcode@gmail.com?subject=Mere Simplicity Business Checkup&body=${encodedSummary}`;
+  formspreeData.append("Customer Contact Method", values.customerContactMethod || "Not provided");
+  formspreeData.append("Sales Follow-Up", values.salesFollowUp || "Not provided");
 
-  form.classList.add("hidden");
-  resultCard.classList.remove("hidden");
+  formspreeData.append("Manual Tasks", values.manualTasks || "Not provided");
+  formspreeData.append("Current Tools", values.currentTools || "Not provided");
 
-  resultCard.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-});
+  formspreeData.append("Operations Problem", values.operationsProblem || "Not provided");
+  formspreeData.append("Process Documentation", values.processDocumentation || "Not provided");
 
-copyBtn.addEventListener("click", async () => {
+  formspreeData.append("Timeline", values.timeline);
+  formspreeData.append("Budget", values.budget);
+  formspreeData.append("Urgency", values.urgency);
+  formspreeData.append("Decision Maker", values.decisionMaker || "Not provided");
+
+  formspreeData.append("Goal", values.goal);
+  formspreeData.append("Extra Notes", values.extraNotes || "None");
+
+  formspreeData.append("Recommended Service Path", recommendation.title);
+  formspreeData.append("Recommendation", recommendation.text);
+  formspreeData.append("Business Readiness Score", `${score}%`);
+  formspreeData.append("Full Summary", summary);
+
   try {
-    await navigator.clipboard.writeText(finalSummary);
-    copyBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied`;
-  } catch {
-    copyBtn.textContent = "Copy failed";
-  }
+    const response = await fetch("https://formspree.io/f/xvznjlqk", {
+      method: "POST",
+      body: formspreeData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
 
-  setTimeout(() => {
-    copyBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Summary`;
-  }, 1800);
+    if (!response.ok) {
+      throw new Error("Form submission failed");
+    }
+
+    resultTitle.textContent = recommendation.title;
+    resultText.textContent = recommendation.text;
+    scoreText.textContent = `${score}%`;
+
+    setTimeout(() => {
+      scoreFill.style.width = `${score}%`;
+    }, 150);
+
+    form.classList.add("hidden");
+    resultCard.classList.remove("hidden");
+
+    resultCard.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } catch (error) {
+    showAlert("Something went wrong. Please try again.");
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Business Checkup";
+  }
 });
 
 restartBtn.addEventListener("click", () => {
   form.reset();
   currentStep = 0;
+
   form.classList.remove("hidden");
   resultCard.classList.add("hidden");
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Submit Business Checkup";
   scoreFill.style.width = "0";
 
   updateStep();
-
-  document.getElementById("checkup").scrollIntoView({
-    behavior: "smooth"
-  });
 });
 
 updateStep();
