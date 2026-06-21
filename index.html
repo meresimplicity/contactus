@@ -33,7 +33,9 @@
 
       <div class="form-intro">
         <p class="eyebrow">Smart intake form</p>
+
         <h2>Tell us where your business is right now.</h2>
+
         <p>
           Answer the questions below so we can understand your business stage,
           your current needs, and the best service path for you.
@@ -52,9 +54,15 @@
       </div>
 
       <div class="form-card">
-        <form id="businessForm" action="https://formspree.io/f/xvznjlqk" method="POST">
-          <input type="hidden" name="_subject" value="New Mere Simplicity Business Checkup">
 
+        <form id="businessForm" action="https://formspree.io/f/xvznjlqk" method="POST">
+
+          <input type="hidden" name="_subject" value="New Mere Simplicity Business Checkup">
+          <input type="hidden" name="recommended_service" id="recommendedService">
+          <input type="hidden" name="business_readiness_score" id="businessScore">
+          <input type="hidden" name="full_summary" id="fullSummary">
+
+          <!-- STEP 1 -->
           <div class="wizard-step active">
             <div class="step-header">
               <span>01</span>
@@ -65,17 +73,17 @@
             <div class="input-grid">
               <label>
                 Full Name
-                <input type="text" name="fullName" placeholder="Your full name" required>
+                <input type="text" name="full_name" placeholder="Your full name" required>
               </label>
 
               <label>
                 Business Name
-                <input type="text" name="businessName" placeholder="Business name or idea name">
+                <input type="text" name="business_name" placeholder="Business name or idea name">
               </label>
 
               <label>
                 WhatsApp Number
-                <input type="tel" name="phone" placeholder="067 993 7070" required>
+                <input type="tel" name="whatsapp_number" placeholder="067 993 7070" required>
               </label>
 
               <label>
@@ -95,6 +103,7 @@
             </div>
           </div>
 
+          <!-- STEP 2 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>02</span>
@@ -102,9 +111,9 @@
               <p>Choose the option that best describes your business right now.</p>
             </div>
 
-            <div class="choice-grid" data-required-group="stage">
+            <div class="choice-grid" data-required-group="business_stage">
               <label class="choice">
-                <input type="radio" name="stage" value="Idea stage">
+                <input type="radio" name="business_stage" value="Idea stage">
                 <span>
                   <strong>I only have an idea</strong>
                   <small>I need help starting properly.</small>
@@ -112,7 +121,7 @@
               </label>
 
               <label class="choice">
-                <input type="radio" name="stage" value="Started but not registered">
+                <input type="radio" name="business_stage" value="Started but not registered">
                 <span>
                   <strong>I have started but I am not registered</strong>
                   <small>I need structure and compliance.</small>
@@ -120,7 +129,7 @@
               </label>
 
               <label class="choice">
-                <input type="radio" name="stage" value="Registered but weak online presence">
+                <input type="radio" name="business_stage" value="Registered but weak online presence">
                 <span>
                   <strong>I am registered but not strong online</strong>
                   <small>I need visibility and customers.</small>
@@ -128,7 +137,7 @@
               </label>
 
               <label class="choice">
-                <input type="radio" name="stage" value="Operating but need better systems">
+                <input type="radio" name="business_stage" value="Operating but need better systems">
                 <span>
                   <strong>I am operating but need better systems</strong>
                   <small>I need automation, workflow, and improvement.</small>
@@ -137,6 +146,7 @@
             </div>
           </div>
 
+          <!-- STEP 3 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>03</span>
@@ -144,9 +154,9 @@
               <p>Select everything that applies.</p>
             </div>
 
-            <div class="choice-grid" data-required-group="services">
+            <div class="choice-grid" data-required-group="services_needed">
               <label class="choice">
-                <input type="checkbox" name="services" value="Business Registration" data-panel="registration">
+                <input type="checkbox" name="services_needed" value="Business Registration" data-panel="registration">
                 <span>
                   <strong>Business Registration</strong>
                   <small>Company, tax, compliance, documentation.</small>
@@ -154,7 +164,7 @@
               </label>
 
               <label class="choice">
-                <input type="checkbox" name="services" value="Website Services" data-panel="website">
+                <input type="checkbox" name="services_needed" value="Website Services" data-panel="website">
                 <span>
                   <strong>Website Services</strong>
                   <small>Design, development, maintenance, SEO.</small>
@@ -162,7 +172,7 @@
               </label>
 
               <label class="choice">
-                <input type="checkbox" name="services" value="Marketing" data-panel="marketing">
+                <input type="checkbox" name="services_needed" value="Marketing" data-panel="marketing">
                 <span>
                   <strong>Marketing</strong>
                   <small>Brand, content, social media, campaigns.</small>
@@ -170,7 +180,7 @@
               </label>
 
               <label class="choice">
-                <input type="checkbox" name="services" value="Sales Systems" data-panel="sales">
+                <input type="checkbox" name="services_needed" value="Sales Systems" data-panel="sales">
                 <span>
                   <strong>Sales Systems</strong>
                   <small>Lead generation, funnels, CRM, follow-up.</small>
@@ -178,7 +188,7 @@
               </label>
 
               <label class="choice">
-                <input type="checkbox" name="services" value="Automation and Support" data-panel="automation">
+                <input type="checkbox" name="services_needed" value="Automation and Support" data-panel="automation">
                 <span>
                   <strong>Automation & Support</strong>
                   <small>Admin systems, integrations, support.</small>
@@ -186,7 +196,7 @@
               </label>
 
               <label class="choice">
-                <input type="checkbox" name="services" value="Industrial Engineering" data-panel="operations">
+                <input type="checkbox" name="services_needed" value="Industrial Engineering" data-panel="operations">
                 <span>
                   <strong>Industrial Engineering</strong>
                   <small>Process improvement and operations flow.</small>
@@ -195,6 +205,7 @@
             </div>
           </div>
 
+          <!-- STEP 4 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>04</span>
@@ -203,24 +214,25 @@
             </div>
 
             <div class="mini-checkbox-grid">
-              <label><input type="checkbox" name="assets" value="Registered Company"> Registered Company</label>
-              <label><input type="checkbox" name="assets" value="Tax Number"> Tax Number</label>
-              <label><input type="checkbox" name="assets" value="Logo"> Logo</label>
-              <label><input type="checkbox" name="assets" value="Website"> Website</label>
-              <label><input type="checkbox" name="assets" value="Domain"> Domain</label>
-              <label><input type="checkbox" name="assets" value="Business Email"> Business Email</label>
-              <label><input type="checkbox" name="assets" value="Google Business Profile"> Google Business Profile</label>
-              <label><input type="checkbox" name="assets" value="Social Media Pages"> Social Media Pages</label>
-              <label><input type="checkbox" name="assets" value="CRM or Lead System"> CRM or Lead System</label>
-              <label><input type="checkbox" name="assets" value="Automated Processes"> Automated Processes</label>
+              <label><input type="checkbox" name="current_assets" value="Registered Company"> Registered Company</label>
+              <label><input type="checkbox" name="current_assets" value="Tax Number"> Tax Number</label>
+              <label><input type="checkbox" name="current_assets" value="Logo"> Logo</label>
+              <label><input type="checkbox" name="current_assets" value="Website"> Website</label>
+              <label><input type="checkbox" name="current_assets" value="Domain"> Domain</label>
+              <label><input type="checkbox" name="current_assets" value="Business Email"> Business Email</label>
+              <label><input type="checkbox" name="current_assets" value="Google Business Profile"> Google Business Profile</label>
+              <label><input type="checkbox" name="current_assets" value="Social Media Pages"> Social Media Pages</label>
+              <label><input type="checkbox" name="current_assets" value="CRM or Lead System"> CRM or Lead System</label>
+              <label><input type="checkbox" name="current_assets" value="Automated Processes"> Automated Processes</label>
             </div>
 
             <label class="single-input">
               Current Website or Social Link
-              <input type="text" name="currentLink" placeholder="Paste link if you have one">
+              <input type="text" name="current_website_or_social_link" placeholder="Paste link if you have one">
             </label>
           </div>
 
+          <!-- STEP 5 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>05</span>
@@ -238,7 +250,7 @@
               <div class="input-grid">
                 <label>
                   Do you already have a registered company?
-                  <select name="companyRegistered">
+                  <select name="company_registered_status">
                     <option value="">Choose one</option>
                     <option>No, I need registration</option>
                     <option>Yes, but I need compliance help</option>
@@ -248,7 +260,7 @@
 
                 <label>
                   What documents do you need?
-                  <input type="text" name="registrationDocuments" placeholder="Example: CIPC, tax, business profile">
+                  <input type="text" name="registration_documents_needed" placeholder="Example: CIPC, tax, business profile">
                 </label>
               </div>
             </div>
@@ -259,7 +271,7 @@
               <div class="input-grid">
                 <label>
                   What type of website do you need?
-                  <select name="websiteType">
+                  <select name="website_type_needed">
                     <option value="">Choose one</option>
                     <option>One-page business website</option>
                     <option>Multi-page company website</option>
@@ -272,7 +284,7 @@
 
                 <label>
                   Do you already have hosting or a domain?
-                  <select name="hostingStatus">
+                  <select name="hosting_domain_status">
                     <option value="">Choose one</option>
                     <option>No, I need both</option>
                     <option>I have a domain only</option>
@@ -290,12 +302,12 @@
               <div class="input-grid">
                 <label>
                   Which platforms do you use?
-                  <input type="text" name="marketingPlatforms" placeholder="Instagram, TikTok, Facebook, Google, WhatsApp">
+                  <input type="text" name="marketing_platforms" placeholder="Instagram, TikTok, Facebook, Google, WhatsApp">
                 </label>
 
                 <label>
                   What is your biggest marketing problem?
-                  <select name="marketingProblem">
+                  <select name="marketing_problem">
                     <option value="">Choose one</option>
                     <option>No content system</option>
                     <option>Weak brand identity</option>
@@ -313,7 +325,7 @@
               <div class="input-grid">
                 <label>
                   How do customers currently contact you?
-                  <select name="customerContactMethod">
+                  <select name="customer_contact_method">
                     <option value="">Choose one</option>
                     <option>WhatsApp only</option>
                     <option>Phone calls</option>
@@ -325,7 +337,7 @@
 
                 <label>
                   What happens after someone shows interest?
-                  <input type="text" name="salesFollowUp" placeholder="Example: I reply manually on WhatsApp">
+                  <input type="text" name="sales_follow_up_process" placeholder="Example: I reply manually on WhatsApp">
                 </label>
               </div>
             </div>
@@ -336,12 +348,12 @@
               <div class="input-grid">
                 <label>
                   Which tasks are you doing manually?
-                  <input type="text" name="manualTasks" placeholder="Invoices, bookings, replies, follow-ups, reports">
+                  <input type="text" name="manual_tasks" placeholder="Invoices, bookings, replies, follow-ups, reports">
                 </label>
 
                 <label>
                   What tools do you currently use?
-                  <input type="text" name="currentTools" placeholder="WhatsApp, Google Sheets, Excel, Gmail, etc.">
+                  <input type="text" name="current_tools" placeholder="WhatsApp, Google Sheets, Excel, Gmail, etc.">
                 </label>
               </div>
             </div>
@@ -352,12 +364,12 @@
               <div class="input-grid">
                 <label>
                   What part of the business feels slow or messy?
-                  <input type="text" name="operationsProblem" placeholder="Orders, production, admin, stock, workflow">
+                  <input type="text" name="operations_problem" placeholder="Orders, production, admin, stock, workflow">
                 </label>
 
                 <label>
                   Do you have documented processes?
-                  <select name="processDocumentation">
+                  <select name="process_documentation_status">
                     <option value="">Choose one</option>
                     <option>No, everything is informal</option>
                     <option>Some processes are documented</option>
@@ -369,6 +381,7 @@
             </div>
           </div>
 
+          <!-- STEP 6 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>06</span>
@@ -390,7 +403,7 @@
 
               <label>
                 Current budget range
-                <select name="budget" required>
+                <select name="budget_range" required>
                   <option value="">Choose one</option>
                   <option>Below R1,000</option>
                   <option>R1,000 - R3,000</option>
@@ -414,7 +427,7 @@
 
               <label>
                 Who makes the final decision?
-                <select name="decisionMaker">
+                <select name="decision_maker">
                   <option value="">Choose one</option>
                   <option>I decide alone</option>
                   <option>I decide with a partner</option>
@@ -424,6 +437,7 @@
             </div>
           </div>
 
+          <!-- STEP 7 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>07</span>
@@ -433,19 +447,23 @@
 
             <label>
               What do you want us to help you achieve?
-              <textarea name="goal" placeholder="Example: I want a professional website, better leads, and a system that helps me manage customers." required></textarea>
+              <textarea name="message" placeholder="Example: I want a professional website, better leads, and a system that helps me manage customers." required></textarea>
             </label>
 
             <label>
               Anything else we should know?
-              <textarea name="extraNotes" placeholder="Add any important details here."></textarea>
+              <textarea name="extra_notes" placeholder="Add any important details here."></textarea>
             </label>
           </div>
 
           <div class="form-buttons">
-            <button type="button" class="btn ghost hidden" id="backBtn">Back</button>
+            <button type="button" class="btn ghost hidden" id="backBtn">
+              Back
+            </button>
 
-            <button type="button" class="btn primary" id="nextBtn">Next</button>
+            <button type="button" class="btn primary" id="nextBtn">
+              Next
+            </button>
 
             <button type="submit" class="btn primary submit-btn hidden" id="submitBtn">
               Submit Business Checkup
@@ -454,22 +472,6 @@
 
         </form>
 
-        <div class="result-card hidden" id="resultCard">
-          <p class="eyebrow">Submitted successfully</p>
-          <h3 id="resultTitle"></h3>
-          <p id="resultText"></p>
-
-          <div class="score-card">
-            <span>Business Readiness Score</span>
-            <strong id="scoreText">0%</strong>
-
-            <div class="score-track">
-              <div id="scoreFill"></div>
-            </div>
-          </div>
-
-          <button class="btn primary" id="restartBtn">Submit another form</button>
-        </div>
       </div>
 
     </section>
