@@ -71,6 +71,11 @@ function updateStep() {
   submitBtn.classList.toggle("hidden", currentStep !== steps.length - 1);
 
   updateConditionalPanels();
+
+  document.querySelector(".form-shell").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 function validateCurrentStep() {
@@ -112,14 +117,6 @@ function showAlert(message) {
   alert.className = "form-alert";
   alert.textContent = message;
 
-  alert.style.background = "#fff3f3";
-  alert.style.color = "#8a1f1f";
-  alert.style.border = "1px solid rgba(138,31,31,0.15)";
-  alert.style.padding = "14px 16px";
-  alert.style.borderRadius = "16px";
-  alert.style.fontWeight = "800";
-  alert.style.marginBottom = "18px";
-
   const activeStep = steps[currentStep];
   activeStep.prepend(alert);
 
@@ -154,10 +151,14 @@ function updateConditionalPanels() {
     const shouldShow = selectedPanels.includes(panel.dataset.panel);
     panel.classList.toggle("show", shouldShow);
 
-    if (shouldShow) visibleCount++;
+    if (shouldShow) {
+      visibleCount++;
+    }
   });
 
-  conditionalEmpty.classList.toggle("hidden", visibleCount > 0);
+  if (conditionalEmpty) {
+    conditionalEmpty.classList.toggle("hidden", visibleCount > 0);
+  }
 }
 
 document.querySelectorAll('input[name="services"]').forEach(input => {
@@ -213,9 +214,11 @@ function createRecommendation(values) {
 
   if (
     services.length >= 4 ||
-    services.includes("Website Services") &&
-    services.includes("Sales Systems") &&
-    services.includes("Marketing")
+    (
+      services.includes("Website Services") &&
+      services.includes("Sales Systems") &&
+      services.includes("Marketing")
+    )
   ) {
     return {
       title: "Full Business Growth System",
