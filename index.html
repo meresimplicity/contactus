@@ -4,143 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Mere Simplicity | Business Growth Systems</title>
+  <title>Mere Simplicity | Business Checkup</title>
 
-  <!-- Favicon using same logo -->
   <link rel="icon" type="image/png" href="public/logo.png">
   <link rel="apple-touch-icon" href="public/logo.png">
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link 
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" 
     rel="stylesheet"
   >
-
-  <!-- Social Icons -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
 </head>
 
 <body>
 
-  <div class="background-glow"></div>
+  <main class="page">
 
-  <header class="header">
-    <a href="#" class="brand">
-      <img src="public/logo.png" alt="Mere Simplicity Logo" class="brand-logo">
+    <header class="logo-area">
+      <img src="public/logo.png" alt="Mere Simplicity Logo" class="logo">
+      <h1>Mere Simplicity</h1>
+      <p>Business Checkup Form</p>
+    </header>
 
-      <div>
-        <strong>Mere Simplicity</strong>
-        <span>Business Growth Systems</span>
-      </div>
-    </a>
+    <section class="form-section">
 
-    <nav class="nav" id="nav">
-      <a href="#checkup">Business Checkup</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-  </header>
-
-  <!-- Floating button to form -->
-  <a href="#checkup" class="floating-checkup-btn">
-    <i class="fa-solid fa-clipboard-question"></i>
-    <span>Start Checkup</span>
-  </a>
-
-  <main>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-content reveal">
-        <p class="eyebrow">Built for South African entrepreneurs</p>
-
-        <h1>
-          We help businesses grow, gain sales, and build better systems.
-        </h1>
-
-        <p class="hero-text">
-          Mere Simplicity helps businesses register, launch online, attract customers,
-          improve operations, automate admin work, and build systems that support real growth.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#checkup" class="btn primary">
-            Start Business Checkup
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-
-          <a href="https://wa.me/27679937070" target="_blank" class="btn secondary">
-            <i class="fa-brands fa-whatsapp"></i>
-            WhatsApp Us
-          </a>
-        </div>
-
-        <div class="trust-row">
-          <span>Websites</span>
-          <span>Registration</span>
-          <span>Marketing</span>
-          <span>Automation</span>
-          <span>Operations</span>
-        </div>
-      </div>
-
-      <div class="hero-visual reveal">
-        <div class="dashboard-card floating">
-          <div class="dashboard-top">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <div class="dashboard-title">
-            <h3>Business Performance</h3>
-            <p>This Month</p>
-          </div>
-
-          <div class="growth-ring">
-            <div>
-              <strong>68%</strong>
-              <span>Growth Potential</span>
-            </div>
-          </div>
-
-          <div class="mini-bars">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <div class="dashboard-note">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <p>Answer a few questions and get a recommended service path.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FORM SECTION MOVED UP -->
-    <section class="checkup" id="checkup">
-      <div class="checkup-info reveal">
+      <div class="form-intro">
         <p class="eyebrow">Smart intake form</p>
-
         <h2>Tell us where your business is right now.</h2>
-
         <p>
-          This form helps Mere Simplicity understand your current business stage,
-          what you already have, what is blocking growth, and which service will help you first.
+          Answer the questions below so we can understand your business stage,
+          your current needs, and the best service path for you.
         </p>
 
         <div class="progress-box">
@@ -155,10 +51,10 @@
         </div>
       </div>
 
-      <div class="form-shell reveal">
-        <form id="businessForm">
+      <div class="form-card">
+        <form id="businessForm" action="https://formspree.io/f/xvznjlqk" method="POST">
+          <input type="hidden" name="_subject" value="New Mere Simplicity Business Checkup">
 
-          <!-- STEP 1 -->
           <div class="wizard-step active">
             <div class="step-header">
               <span>01</span>
@@ -199,7 +95,6 @@
             </div>
           </div>
 
-          <!-- STEP 2 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>02</span>
@@ -242,12 +137,11 @@
             </div>
           </div>
 
-          <!-- STEP 3 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>03</span>
               <h3>What do you need help with?</h3>
-              <p>Select everything that applies. We will ask better questions based on your choices.</p>
+              <p>Select everything that applies.</p>
             </div>
 
             <div class="choice-grid" data-required-group="services">
@@ -301,7 +195,6 @@
             </div>
           </div>
 
-          <!-- STEP 4 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>04</span>
@@ -322,29 +215,25 @@
               <label><input type="checkbox" name="assets" value="Automated Processes"> Automated Processes</label>
             </div>
 
-            <div class="input-grid single-gap">
-              <label>
-                Current Website or Social Link
-                <input type="text" name="currentLink" placeholder="Paste link if you have one">
-              </label>
-            </div>
+            <label class="single-input">
+              Current Website or Social Link
+              <input type="text" name="currentLink" placeholder="Paste link if you have one">
+            </label>
           </div>
 
-          <!-- STEP 5 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>05</span>
               <h3>Service-specific questions</h3>
-              <p>These questions change based on what you selected.</p>
+              <p>These questions appear based on what you selected.</p>
             </div>
 
             <div class="conditional-empty" id="conditionalEmpty">
-              <i class="fa-solid fa-circle-info"></i>
-              <p>Select services in the previous step to unlock specific questions.</p>
+              <p>Select services in step 3 to unlock specific questions.</p>
             </div>
 
             <div class="conditional-panel" data-panel="registration">
-              <h4><i class="fa-regular fa-file-lines"></i> Business Registration</h4>
+              <h4>Business Registration</h4>
 
               <div class="input-grid">
                 <label>
@@ -365,7 +254,7 @@
             </div>
 
             <div class="conditional-panel" data-panel="website">
-              <h4><i class="fa-solid fa-desktop"></i> Website Services</h4>
+              <h4>Website Services</h4>
 
               <div class="input-grid">
                 <label>
@@ -396,7 +285,7 @@
             </div>
 
             <div class="conditional-panel" data-panel="marketing">
-              <h4><i class="fa-solid fa-bullhorn"></i> Marketing</h4>
+              <h4>Marketing</h4>
 
               <div class="input-grid">
                 <label>
@@ -419,7 +308,7 @@
             </div>
 
             <div class="conditional-panel" data-panel="sales">
-              <h4><i class="fa-solid fa-filter-circle-dollar"></i> Sales Systems</h4>
+              <h4>Sales Systems</h4>
 
               <div class="input-grid">
                 <label>
@@ -442,7 +331,7 @@
             </div>
 
             <div class="conditional-panel" data-panel="automation">
-              <h4><i class="fa-solid fa-robot"></i> Automation & Support</h4>
+              <h4>Automation & Support</h4>
 
               <div class="input-grid">
                 <label>
@@ -458,7 +347,7 @@
             </div>
 
             <div class="conditional-panel" data-panel="operations">
-              <h4><i class="fa-solid fa-industry"></i> Industrial Engineering</h4>
+              <h4>Industrial Engineering</h4>
 
               <div class="input-grid">
                 <label>
@@ -480,7 +369,6 @@
             </div>
           </div>
 
-          <!-- STEP 6 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>06</span>
@@ -536,7 +424,6 @@
             </div>
           </div>
 
-          <!-- STEP 7 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>07</span>
@@ -556,27 +443,19 @@
           </div>
 
           <div class="form-buttons">
-            <button type="button" class="btn ghost hidden" id="backBtn">
-              <i class="fa-solid fa-arrow-left"></i>
-              Back
-            </button>
+            <button type="button" class="btn ghost hidden" id="backBtn">Back</button>
 
-            <button type="button" class="btn primary" id="nextBtn">
-              Next
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <button type="button" class="btn primary" id="nextBtn">Next</button>
 
-            <button type="submit" class="btn primary hidden" id="submitBtn">
-              Get Recommendation
-              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <button type="submit" class="btn primary submit-btn hidden" id="submitBtn">
+              Submit Business Checkup
             </button>
           </div>
 
         </form>
 
         <div class="result-card hidden" id="resultCard">
-          <p class="eyebrow">Recommended path</p>
-
+          <p class="eyebrow">Submitted successfully</p>
           <h3 id="resultTitle"></h3>
           <p id="resultText"></p>
 
@@ -589,209 +468,13 @@
             </div>
           </div>
 
-          <div class="result-actions">
-            <a href="#" target="_blank" class="btn primary" id="whatsappLink">
-              <i class="fa-brands fa-whatsapp"></i>
-              Send to WhatsApp
-            </a>
-
-            <a href="#" class="btn secondary" id="emailLink">
-              <i class="fa-regular fa-envelope"></i>
-              Send by Email
-            </a>
-
-            <button class="btn ghost" id="copyBtn">
-              <i class="fa-regular fa-copy"></i>
-              Copy Summary
-            </button>
-          </div>
-
-          <button class="restart-btn" id="restartBtn">Start again</button>
+          <button class="btn primary" id="restartBtn">Submit another form</button>
         </div>
       </div>
-    </section>
 
-    <!-- VALUE STRIP -->
-    <section class="value-strip reveal">
-      <div>
-        <i class="fa-solid fa-chart-line"></i>
-        <strong>More Visibility</strong>
-        <span>Be found online</span>
-      </div>
-
-      <div>
-        <i class="fa-solid fa-users"></i>
-        <strong>More Customers</strong>
-        <span>Convert attention into leads</span>
-      </div>
-
-      <div>
-        <i class="fa-solid fa-cart-shopping"></i>
-        <strong>More Sales</strong>
-        <span>Build a better sales flow</span>
-      </div>
-
-      <div>
-        <i class="fa-solid fa-gears"></i>
-        <strong>Better Systems</strong>
-        <span>Reduce manual work</span>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="services" id="services">
-      <div class="section-heading reveal">
-        <p class="eyebrow">What we offer</p>
-        <h2>Everything your business needs to look professional and operate better.</h2>
-      </div>
-
-      <div class="service-grid">
-
-        <article class="service-card reveal">
-          <span>01</span>
-          <i class="fa-regular fa-file-lines"></i>
-          <h3>Business Registration</h3>
-
-          <ul>
-            <li>Company Registration</li>
-            <li>Tax Registration</li>
-            <li>Compliance Support</li>
-            <li>Business Documentation</li>
-            <li>Registration Guidance</li>
-          </ul>
-        </article>
-
-        <article class="service-card reveal">
-          <span>02</span>
-          <i class="fa-solid fa-desktop"></i>
-          <h3>Website Services</h3>
-
-          <ul>
-            <li>Website Design</li>
-            <li>Website Development</li>
-            <li>Website Maintenance</li>
-            <li>Hosting & Domain Support</li>
-            <li>SEO Optimization</li>
-          </ul>
-        </article>
-
-        <article class="service-card reveal">
-          <span>03</span>
-          <i class="fa-solid fa-filter-circle-dollar"></i>
-          <h3>Sales Systems</h3>
-
-          <ul>
-            <li>Sales Strategy</li>
-            <li>Lead Generation</li>
-            <li>Sales Funnels</li>
-            <li>CRM Setup</li>
-            <li>Customer Retention</li>
-          </ul>
-        </article>
-
-        <article class="service-card reveal">
-          <span>04</span>
-          <i class="fa-solid fa-bullhorn"></i>
-          <h3>Marketing</h3>
-
-          <ul>
-            <li>Digital Marketing</li>
-            <li>Brand Strategy</li>
-            <li>Content Systems</li>
-            <li>Social Media Management</li>
-            <li>Market Positioning</li>
-          </ul>
-        </article>
-
-        <article class="service-card reveal">
-          <span>05</span>
-          <i class="fa-solid fa-industry"></i>
-          <h3>Industrial Engineering</h3>
-
-          <ul>
-            <li>Work Study</li>
-            <li>Process Improvement</li>
-            <li>Workflow Optimization</li>
-            <li>Operations Analysis</li>
-            <li>Productivity Improvement</li>
-          </ul>
-        </article>
-
-        <article class="service-card reveal">
-          <span>06</span>
-          <i class="fa-solid fa-robot"></i>
-          <h3>Automation & Support</h3>
-
-          <ul>
-            <li>Business Automation</li>
-            <li>Systems Integration</li>
-            <li>Administrative Support</li>
-            <li>Technical Support</li>
-            <li>Ongoing Maintenance</li>
-          </ul>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Reach us</p>
-        <h2>Let us build the system your business actually needs.</h2>
-      </div>
-
-      <div class="social-grid reveal">
-
-        <a href="https://wa.me/27679937070" target="_blank" class="social-card">
-          <i class="fa-brands fa-whatsapp"></i>
-
-          <div>
-            <strong>WhatsApp</strong>
-            <span>067 993 7070</span>
-          </div>
-        </a>
-
-        <a href="https://instagram.com/meresimplicity" target="_blank" class="social-card">
-          <i class="fa-brands fa-instagram"></i>
-
-          <div>
-            <strong>Instagram</strong>
-            <span>@meresimplicity</span>
-          </div>
-        </a>
-
-        <a href="mailto:vision.teamcode@gmail.com" class="social-card">
-          <i class="fa-regular fa-envelope"></i>
-
-          <div>
-            <strong>Email</strong>
-            <span>vision.teamcode@gmail.com</span>
-          </div>
-        </a>
-
-        <a href="https://meresimplicity.co.za" target="_blank" class="social-card">
-          <i class="fa-solid fa-globe"></i>
-
-          <div>
-            <strong>Website</strong>
-            <span>meresimplicity.co.za</span>
-          </div>
-        </a>
-
-      </div>
     </section>
 
   </main>
-
-  <footer class="footer">
-    <div>
-      <strong>Mere Simplicity</strong>
-      <span>Smart Systems | Real Results | Sustainable Growth</span>
-    </div>
-
-    <p id="year"></p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
