@@ -62,7 +62,6 @@
           <input type="hidden" name="business_readiness_score" id="businessScore">
           <input type="hidden" name="full_summary" id="fullSummary">
 
-          <!-- STEP 1 -->
           <div class="wizard-step active">
             <div class="step-header">
               <span>01</span>
@@ -103,7 +102,6 @@
             </div>
           </div>
 
-          <!-- STEP 2 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>02</span>
@@ -146,7 +144,6 @@
             </div>
           </div>
 
-          <!-- STEP 3 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>03</span>
@@ -205,7 +202,6 @@
             </div>
           </div>
 
-          <!-- STEP 4 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>04</span>
@@ -232,7 +228,6 @@
             </label>
           </div>
 
-          <!-- STEP 5 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>05</span>
@@ -381,7 +376,6 @@
             </div>
           </div>
 
-          <!-- STEP 6 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>06</span>
@@ -437,7 +431,6 @@
             </div>
           </div>
 
-          <!-- STEP 7 -->
           <div class="wizard-step">
             <div class="step-header">
               <span>07</span>
@@ -471,6 +464,22 @@
           </div>
 
         </form>
+
+        <div class="success-card hidden" id="successCard">
+          <div class="success-icon">
+            <svg viewBox="0 0 52 52">
+              <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+              <path class="success-check" fill="none" d="M14 27 L22 35 L38 17"/>
+            </svg>
+          </div>
+
+          <h3>We got your message.</h3>
+          <p>Thank you for completing the Mere Simplicity business checkup. We will be in touch shortly.</p>
+
+          <button class="btn primary" id="resetBtn">
+            Submit another form
+          </button>
+        </div>
 
       </div>
 
