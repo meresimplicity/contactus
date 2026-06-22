@@ -16,6 +16,9 @@ const recommendedServiceField = document.getElementById("recommendedService");
 const businessScoreField = document.getElementById("businessScore");
 const fullSummaryField = document.getElementById("fullSummary");
 
+const successCard = document.getElementById("successCard");
+const resetBtn = document.getElementById("resetBtn");
+
 let currentStep = 0;
 
 function updateStep() {
@@ -329,9 +332,10 @@ ${score}%
 `;
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
   if (!validateCurrentStep()) {
-    event.preventDefault();
     return;
   }
 
@@ -346,6 +350,53 @@ form.addEventListener("submit", (event) => {
 
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting...";
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch("https://formspree.io/f/xvznjlqk", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Submission failed");
+    }
+
+    form.classList.add("hidden");
+    successCard.classList.remove("hidden");
+
+    document.querySelector(".form-card").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } catch (error) {
+    showAlert("Something went wrong. Please try again or contact us on WhatsApp.");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Business Checkup";
+  }
+});
+
+resetBtn.addEventListener("click", () => {
+  form.reset();
+
+  currentStep = 0;
+
+  form.classList.remove("hidden");
+  successCard.classList.add("hidden");
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Submit Business Checkup";
+
+  recommendedServiceField.value = "";
+  businessScoreField.value = "";
+  fullSummaryField.value = "";
+
+  updateStep();
 });
 
 updateStep();
